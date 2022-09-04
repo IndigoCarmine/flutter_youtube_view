@@ -18,9 +18,8 @@ class FlutterYoutubeViewController {
     await _channel.invokeMethod('initialization');
   }
 
-  Future<void> loadOrCueVideo(String videoId,
-      double startSeconds,
-      { bool autoPlay = true }) async {
+  Future<void> loadOrCueVideo(String videoId, double startSeconds,
+      {bool autoPlay = true}) async {
     assert(videoId != null);
     var params = <String, dynamic>{
       "videoId": videoId,
@@ -42,26 +41,28 @@ class FlutterYoutubeViewController {
     await _channel.invokeMethod('seekTo', time);
   }
 
-  /// Change player PlaybackRate based on [PlaybackRate] or [rateValue]. If both params, [PlaybackRate] will be used.
-  Future<void> setPlaybackRate({required PlaybackRate rate, double rateValue = 1.0}) async {
+  /// Change player PlaybackRate based on [PlaybackRate] or [rateValue].
+  Future<void> setPlaybackRate(
+      {required PlaybackRate rate, double rateValue = 1.0}) async {
     switch (rate) {
-      case(PlaybackRate.RATE_0_25):
+      case (PlaybackRate.RATE_0_25):
         rateValue = 0.25;
         break;
-      case(PlaybackRate.RATE_0_5):
+      case (PlaybackRate.RATE_0_5):
         rateValue = 0.5;
         break;
-      case(PlaybackRate.RATE_1):
+      case (PlaybackRate.RATE_1):
         rateValue = 1;
         break;
-      case(PlaybackRate.RATE_1_5):
+      case (PlaybackRate.RATE_1_5):
         rateValue = 1.5;
         break;
-      case(PlaybackRate.RATE_2):
+      case (PlaybackRate.RATE_2):
         rateValue = 2.0;
         break;
+      case (PlaybackRate.CUSTOM_RATE):
+        break;
       default:
-        rateValue = rateValue;
         break;
     }
     await _channel.invokeMethod('setPlaybackRate', rateValue);
