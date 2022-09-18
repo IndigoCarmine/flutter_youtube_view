@@ -175,7 +175,8 @@ class FlutterYoutubeView(
             }
             "setPlaybackRate" -> {
                 val rate = (methodCall.arguments as Double).toFloat()
-                runJavascript("javascript:setPlaybackRate($rate)")
+                runJavascript("javascript:document.getElementsByClassName('video-stream html5-main-video')[0].playbackRate= 
+$rate")
                 result.success(null)
             }
             else -> result.notImplemented()
